@@ -58,9 +58,11 @@ affinity: {}
 # default is Always but for Jobs use Never or OnFailure
 restartPolicy: Never
 
-command: ["hey"]
-args:
-  - "http://flask-test.jx-staging.35.241.199.38.nip.io"
+hey:
+  url: "http://flask-test.jx-staging.35.241.199.38.nip.io"
+  numberOfRequests: 1000
+  concurrentRequests: 100
+
 
 internalPort: 80
 

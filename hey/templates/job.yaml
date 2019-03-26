@@ -26,13 +26,13 @@ spec:
 {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{ if .Values.command -}}
-          command: {{ .Values.command }}
-          {{- end }}
-          {{ if .Values.args -}}
+          command: ["hey"]
           args:
-{{ toYaml .Values.args | indent 10 }}
-          {{- end }}
+            - -c
+            - "{{ .Values.hey.concurrentRequests }}"
+            - -n
+            - "{{ .Values.hey.numberOfRequests }}"
+            - "{{ .Values.hey.url }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
