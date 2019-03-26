@@ -12,9 +12,16 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+job:
+  enabled: true
+
+deployment:
+  enabled: false
+
 service:
   type: ClusterIP
   port: 80
+  enabled: false
 
 ingress:
   enabled: false
@@ -46,3 +53,16 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+# default is Always but for Jobs use Never or OnFailure
+restartPolicy: Never
+
+command: ["hey"]
+args:
+  - "http://flask-test.jx-staging.35.241.199.38.nip.io"
+
+internalPort: 80
+
+probe:
+  path: /
